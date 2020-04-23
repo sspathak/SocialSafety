@@ -1,0 +1,8 @@
+Each feature extractor has its own .py file
+	feature extractor takes one line of .csv file as input
+	returns an array (feature vector)
+
+Main feature function has a .py file
+	calls other feature extractors
+	merges all return values into one single feature vector
+
