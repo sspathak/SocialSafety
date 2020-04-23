@@ -1,12 +1,14 @@
 import python_speech_features
 import numpy as np
+import librosa
 import scipy
 
 
 def _get_mfcc(audio_data):
     # TODO
     # use python_speech_features.mfcc() or librosa.feature.mfcc()
-    return [None]
+    mfcc_vec = librosa.feature.mfcc(audio_data, 44100) # adjust sampling rate
+    return [mfcc_vec]
 
 
 def get_feature_vector(labeled_audio_data):

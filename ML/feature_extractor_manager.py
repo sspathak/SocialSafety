@@ -20,4 +20,5 @@ def get_combined_feature_vector(data):
 
 if __name__ == "__main__":
     data = [None]
-    get_combined_feature_vector(data)
+    label = "cough"
+    get_combined_feature_vector([data, label])
