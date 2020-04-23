@@ -3,6 +3,7 @@ from .feature_extractors import power_spectral_density
 from .feature_extractors import spectral_centroid
 from .feature_extractors import spectral_flux
 from .feature_extractors import spectral_rolloff
+from .feature_extractors import spectral_flatness
 import numpy as np
 
 feature_funciton_array = [
@@ -11,9 +12,10 @@ feature_funciton_array = [
     spectral_centroid,
     spectral_flux,
     spectral_rolloff,
+    spectral_flatness,
 ]
 
-# data = csv line
+# data = csv line with label at the end
 def get_combined_feature_vector(data):
     grand_feature_vector = (np.array([i(data) for i in feature_funciton_array])).flatten
     return grand_feature_vector
