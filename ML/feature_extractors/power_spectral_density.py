@@ -1,10 +1,10 @@
 import scipy
+import scipy.signal
 
 
 def _get_psd(audio_data):
-    # TODO
-    # use scipy.signal.welch()
-    return [None]
+    _, psd = scipy.signal.welch(audio_data)
+    return [psd]
 
 
 def get_feature_vector(labeled_audio_data):
