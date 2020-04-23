@@ -1,10 +1,12 @@
+# https://librosa.github.io/librosa/generated/librosa.feature.spectral_rolloff.html
+
 import librosa.feature
 
 
 def _get_spectral_rolloff(audio_data):
     # TODO
-    # use librosa.feature.spectral_rolloff()
-    return [None]
+    spec_roll = librosa.feature.spectral_rolloff(audio_data, 44100)
+    return [spec_roll]
 
 
 def get_feature_vector(labeled_audio_data):

@@ -3,7 +3,7 @@ import librosa.feature
 
 def _get_spectral_centroid(audio_data):
     # TODO
-    spec_c = librosa.feature.spectral_centroid(audio_data)
+    spec_c = librosa.feature.spectral_centroid(audio_data, 44100)
     return [spec_c]
 
 
