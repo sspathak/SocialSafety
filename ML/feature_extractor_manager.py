@@ -23,7 +23,7 @@ feature_funciton_array = [
 
 # data = csv line with label at the end
 def get_combined_feature_vector(data):
-    grand_feature_vector = [val for sublist in [i(data)[0].ravel() for i in feature_funciton_array] for val in sublist]
+    grand_feature_vector = [val for sublist in [i(data.astype(float))[0].ravel() for i in feature_funciton_array] for val in sublist]
     return grand_feature_vector
 
 if __name__ == "__main__":
