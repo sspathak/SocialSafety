@@ -4,7 +4,7 @@ import scipy.io.wavfile
 import numpy as np
 
 csv_folder="CSVs"
-
+critical_labels = ['cough', 'speech', 'silence']
 
 def print_stats(duration_mp):
 
@@ -18,19 +18,23 @@ def print_stats(duration_mp):
         print("Label " + labelStat[1] + " ; Total duration: " + str(round(labelStat[0], 2)) + " seconds")
 
 def save_data(lab, dat):
-    csv_file_path = os.path.join(csv_folder,lab + ".csv")
+    csv_file_path = os.path.join(csv_folder, lab + ".csv")
 
-    dat.append(lab)
-    print(dat)
+    # print("saving")
+    dat.append(critical_labels.index(lab))
+    # print(dat)
     # print(str(dat)[1:-1])
-    try:
-        dt = np.asarray(dat)[:, 0]
-    except IndexError:
-        dt = np.asarray(dat)
+
+    dt = np.array([dat])
+
+    # print(dt)
+
     with open(csv_file_path, 'ab') as fil:
     #     fil.write(str(dat)[1:-1]+f",{lab}\n")
         np.savetxt(fil, dt, delimiter=",")
-    print("Appended to file")
+    # print("Appended to file")
+
+
 
 
 def main():
@@ -42,7 +46,8 @@ def main():
 
     duration_mp = {}
     data_map = {}
-    critical_labels = ['cough', 'speech', 'silence']
+    # critical_labels = ['cough', 'speech', 'silence']
+    critical_labels = ['cough']
 
     cough_data = []
     speech_data = []
@@ -68,6 +73,8 @@ def main():
             try:
                 wav_file_data = wav_file_data[:, 0]
             except IndexError:
+                # print(wav_file_data)
+                print("INDEX ERROR_____________________________________________________")
                 pass
         except FileNotFoundError:
             continue
@@ -106,14 +113,14 @@ def main():
                 data_map[lab] = []
 
             duration_mp[lab] += (entry.end - entry.start)
-            print(wav_file_data)
+            # print(wav_file_data)
             data_map[lab].extend(wav_file_data[start_ts:end_ts])
 
         for (lbl, dat) in data_map.items():
 
             while len(data_map[lbl]) > 8001:
-                print("CONTINUE?", end="")
-                input()
+                # print("CONTINUE?", end="")
+                # input()
                 save_data(lbl, data_map[lbl][:8001])
                 data_map[lbl] = data_map[lbl][8001:]
             print()
