@@ -9,6 +9,7 @@ def _get_spectral_flux(audio_data):
     # TODO
     # source: link # 1
     def FeatureSpectralFlux(X):
+        X = np.reshape(X[:-1], (2, -1)).T
         # difference spectrum (set first diff to zero)
         X = np.c_[X[:, 0], X]
         # X = np.concatenate(X[:,0],X, axis=1)
@@ -37,11 +38,12 @@ def _get_spectral_flux(audio_data):
 
         return sp_flux
 
-    return [None]
+    return FeatureSpectralFlux(audio_data)
 
 
 def get_feature_vector(labeled_audio_data):
-    audio_data, label = labeled_audio_data
+    audio_data = labeled_audio_data[:-1]
+    label = labeled_audio_data[-1]
     spectral_flux = _get_spectral_flux(audio_data)
     return [spectral_flux, label]
 

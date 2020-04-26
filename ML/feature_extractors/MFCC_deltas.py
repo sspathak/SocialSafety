@@ -4,18 +4,21 @@ import librosa
 import scipy
 
 
-def _get_mfcc(audio_data):
+def _get_mfcc_delta(audio_data):
     # TODO
     # use python_speech_features.mfcc() or librosa.feature.mfcc()
-    mfcc_vec = librosa.feature.mfcc(audio_data, 44100) # adjust sampling rate
-    # mfcc_vec = np.mean(librosa.feature.mfcc(audio_data, 44100))
+    mfcc_vec = librosa.feature.mfcc(audio_data[:(len(audio_data)//2)], 44100) # adjust sampling rate
+    mfcc_vec_2 = librosa.feature.mfcc(audio_data[(len(audio_data)//2):], 44100)
+    mfcc_vec = mfcc_vec_2 - mfcc_vec
+
+    # mfcc_vec = np.mean(mfcc_vec)
     return mfcc_vec
 
 
 def get_feature_vector(labeled_audio_data):
     audio_data = labeled_audio_data[:-1]
     label = labeled_audio_data[-1]
-    mfcc = _get_mfcc(audio_data)
+    mfcc = _get_mfcc_delta(audio_data)
     return [mfcc, label]
 
 
@@ -24,6 +27,6 @@ if __name__ == "__main__":
     # open csv file
     csvfile = []
 
-    # print mfcc for each line
+    # print mfcc_deltas for each line
     for i in csvfile:
-        print("MFCC = " + str(_get_mfcc(i)))
+        print("MFCC = " + str(_get_mfcc_delta(i)))

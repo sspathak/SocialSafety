@@ -2,6 +2,7 @@
 
 import scipy
 import scipy.signal
+import numpy as np
 
 
 def _get_psd(audio_data):

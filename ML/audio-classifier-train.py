@@ -59,7 +59,7 @@ print("Found data for {} classes : {}".format(len(class_names), ", ".join(class_
 
 # TODO update feature length
 # Update this depending on how you compute your features
-n_features = 497
+n_features = 659 #338 #179 #338 #657
 # default value
 # n_features = 1077
 print("Extracting features and labels for {} audio windows...".format(data.shape[0]))
@@ -153,7 +153,7 @@ for i, (train_index, test_index) in enumerate(cv.split(X)):
     y_train, y_test = y[train_index], y[test_index]
     print("Fold {} : Training Random Forest classifier over {} points...".format(i, len(y_train)))
     sys.stdout.flush()
-    clf = RandomForestClassifier(n_estimators=100)
+    clf = RandomForestClassifier(n_estimators=100, min_samples_split=4)
     clf.fit(X_train, y_train)
 
     print("Evaluating classifier over {} points...".format(len(y_test)))
