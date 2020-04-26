@@ -8,11 +8,12 @@ def _get_mfcc(audio_data):
     # TODO
     # use python_speech_features.mfcc() or librosa.feature.mfcc()
     mfcc_vec = librosa.feature.mfcc(audio_data, 44100) # adjust sampling rate
-    return [mfcc_vec]
+    return mfcc_vec
 
 
 def get_feature_vector(labeled_audio_data):
-    audio_data, label = labeled_audio_data
+    audio_data = labeled_audio_data[:-1]
+    label = labeled_audio_data[-1]
     mfcc = _get_mfcc(audio_data)
     return [mfcc, label]
 

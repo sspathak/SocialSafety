@@ -6,11 +6,12 @@ import scipy.signal
 
 def _get_psd(audio_data):
     _, psd = scipy.signal.welch(audio_data)
-    return [psd]
+    return psd
 
 
 def get_feature_vector(labeled_audio_data):
-    audio_data, label = labeled_audio_data
+    audio_data = labeled_audio_data[:-1]
+    label = labeled_audio_data[-1]
     PSD = _get_psd(audio_data)
     return [PSD, label]
 

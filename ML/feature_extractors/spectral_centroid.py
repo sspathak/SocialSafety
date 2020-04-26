@@ -6,11 +6,12 @@ import librosa.feature
 def _get_spectral_centroid(audio_data):
     # TODO
     spec_c = librosa.feature.spectral_centroid(audio_data, 44100)
-    return [spec_c]
+    return spec_c
 
 
 def get_feature_vector(labeled_audio_data):
-    audio_data, label = labeled_audio_data
+    audio_data = labeled_audio_data[:-1]
+    label = labeled_audio_data[-1]
     spectral_centroid = _get_spectral_centroid(audio_data)
     return [spectral_centroid, label]
 

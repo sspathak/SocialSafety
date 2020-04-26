@@ -6,11 +6,12 @@ import librosa.feature
 def _get_spectral_flatness(audio_data):
     # TODO
     spec_fl = librosa.feature.spectral_flatness(audio_data)
-    return [spec_fl]
+    return spec_fl
 
 
 def get_feature_vector(labeled_audio_data):
-    audio_data, label = labeled_audio_data
+    audio_data = labeled_audio_data[:-1]
+    label = labeled_audio_data[-1]
     spectral_flatness = _get_spectral_flatness(audio_data)
     return [spectral_flatness, label]
 

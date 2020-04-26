@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 # from features import FeatureExtractor
-from . import feature_extractor_manager
+from feature_extractor_manager import get_combined_feature_vector
 from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix
 import pickle
@@ -17,7 +17,7 @@ import pickle
 #
 # -----------------------------------------------------------------------------
 
-data_dir = './data'  # directory where the data files are stored
+data_dir = '../CSVs'  # directory where the data files are stored
 
 output_dir = './training_output'  # directory where the classifier(s) are stored
 
@@ -59,7 +59,7 @@ print("Found data for {} classes : {}".format(len(class_names), ", ".join(class_
 
 # TODO update feature length
 # Update this depending on how you compute your features
-n_features = 1101
+n_features = 497
 # default value
 # n_features = 1077
 print("Extracting features and labels for {} audio windows...".format(data.shape[0]))
@@ -77,8 +77,9 @@ for i, window_with_timestamp_and_label in enumerate(data):
     label = window_with_timestamp_and_label[-1]
     # if label > 1:
     #     print("break here ")
-    print(label)
-    x = feature_extractor_manager.get_combined_feature_vector(window)
+    # input(label)
+    x = get_combined_feature_vector(window)
+    # input(x)
     if len(x) != X.shape[1]:
         print("Received feature vector of length {}. Expected feature vector of length {}.".format(len(x), X.shape[1]))
     X = np.append(X, np.reshape(x, (1, -1)), axis=0)

@@ -4,7 +4,8 @@ import scipy.io.wavfile
 import numpy as np
 
 csv_folder="CSVs"
-critical_labels = ['cough', 'speech', 'silence']
+# critical_labels = ['cough', 'speech', 'silence', 'etc]
+critical_labels = ['a', 'b', 'c', 'etc']
 
 def print_stats(duration_mp):
 
@@ -47,7 +48,7 @@ def main():
     duration_mp = {}
     data_map = {}
     # critical_labels = ['cough', 'speech', 'silence']
-    critical_labels = ['cough']
+    critical_labels = ['a', 'b', 'c', 'etc']
 
     cough_data = []
     speech_data = []
@@ -58,6 +59,9 @@ def main():
     for file in files:
         # if count < 3:
         #     count += 1
+        #     continue
+
+        # if count % 2 != 0:
         #     continue
         if not file.endswith('.TextGrid'):
             continue
