@@ -43,7 +43,7 @@ def predict(window):
     X = np.reshape(X,(1,-1))
 
     # TODO: Fill in speaker names. Make sure labels match your training data
-    classes = ["Silence", "Speech", "Cough", "Throat-Clearing"] #...
+    classes = ["Silence", "Speech", "Cough", "Throat-Clearing/Mild Cough"] #...
     
     index = classifier.predict(X)
     # print(index)
@@ -132,7 +132,7 @@ try:
                 if (sensor_type == u"SENSOR_AUDIO"):
                     t=data['data']['t'] # timestamp isn't used
                     audio_buffer=data['data']['values']
-                    print(audio_buffer)
+                    # print(audio_buffer)
                     print("Received audio data of length {}".format(len(audio_buffer)))
                     t = threading.Thread(target=predict, args=(np.asarray(audio_buffer),))
                     t.start()
