@@ -184,6 +184,14 @@ print("The average recall is {}".format(total_recall / 10.0)) # added sum() to r
 # Set this to the best model you found, trained on all the data:
 best_classifier = RandomForestClassifier(n_estimators=100)
 best_classifier.fit(X, y)
+
+
+classifier_filename = 'classifier.pickle'
+print("Saving best classifier to {}...".format(os.path.join(output_dir, classifier_filename)))
+with open(os.path.join(output_dir, classifier_filename), 'wb') as f:  # 'wb' stands for 'write bytes'
+    pickle.dump(best_classifier, f)
+
+
 importance = best_classifier.feature_importances_
 std = np.std([tree.feature_importances_ for tree in best_classifier.estimators_], axis=0)
 indices = np.argsort(importance)[::-1]
@@ -201,8 +209,3 @@ plt.plot(importance)
 # plt.xlim([-1, n_features])
 plt.show()
 
-
-classifier_filename = 'classifier.pickle'
-print("Saving best classifier to {}...".format(os.path.join(output_dir, classifier_filename)))
-with open(os.path.join(output_dir, classifier_filename), 'wb') as f:  # 'wb' stands for 'write bytes'
-    pickle.dump(best_classifier, f)
