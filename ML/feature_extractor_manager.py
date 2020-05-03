@@ -20,7 +20,7 @@ feature_funciton_array = [
     feature_extractors.spectral_flux.get_feature_vector,
     feature_extractors.spectral_rolloff.get_feature_vector,
     feature_extractors.spectral_flatness.get_feature_vector,
-    feature_extractors.MFCC_deltas.get_feature_vector,
+    # feature_extractors.MFCC_deltas.get_feature_vector,
 ]
 
 # data = csv line with label at the end

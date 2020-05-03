@@ -60,7 +60,7 @@ print("Found data for {} classes : {}".format(len(class_names), ", ".join(class_
 
 # TODO update feature length
 # Update this depending on how you compute your features
-n_features = 174 #659 #338 #179 #338 #657
+n_features = 25 #45 #174 #659 #338 #179 #338 #657
 # default value
 # n_features = 1077
 print("Extracting features and labels for {} audio windows...".format(data.shape[0]))

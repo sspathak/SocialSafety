@@ -40,7 +40,7 @@ def _get_spectral_flux(audio_data):
 
     spectral_flux = FeatureSpectralFlux(audio_data)
     spectral_flux = np.array([np.mean(i) for i in spectral_flux])
-    return spectral_flux
+    return spectral_flux[1]
 
 
 def get_feature_vector(labeled_audio_data):
