@@ -14,6 +14,7 @@ def get_feature_vector(labeled_audio_data):
     audio_data = labeled_audio_data[:-1]
     label = labeled_audio_data[-1]
     PSD = _get_psd(audio_data)
+    PSD = np.array([np.mean(i) for i in PSD])
     return [PSD, label]
 
 

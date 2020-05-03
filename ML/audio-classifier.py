@@ -39,7 +39,7 @@ def predict(window):
     user. You must use the same feature 
     extraction method that you used to train the model.
     """
-    X = get_combined_feature_vector(np.asarray(window))
+    X = get_combined_feature_vector(np.asarray(window[2:]))
     X = np.reshape(X,(1,-1))
 
     # TODO: Fill in speaker names. Make sure labels match your training data

@@ -60,7 +60,7 @@ print("Found data for {} classes : {}".format(len(class_names), ", ".join(class_
 
 # TODO update feature length
 # Update this depending on how you compute your features
-n_features = 659 #338 #179 #338 #657
+n_features = 174 #659 #338 #179 #338 #657
 # default value
 # n_features = 1077
 print("Extracting features and labels for {} audio windows...".format(data.shape[0]))
@@ -73,7 +73,7 @@ y = np.zeros(0, )
 # feature_extractor = FeatureExtractor(debug=False)
 
 for i, window_with_timestamp_and_label in enumerate(data):
-    window = window_with_timestamp_and_label[1:-1]
+    window = window_with_timestamp_and_label[3:-1]
     # label = data[i][-1]
     label = window_with_timestamp_and_label[-1]
     # if label > 1:
@@ -112,7 +112,7 @@ cv = KFold(n_splits=10, shuffle=True, random_state=None)
 for i, (train_index, test_index) in enumerate(cv.split(X)):
     X_train, X_test = X[train_index], X[test_index]
     y_train, y_test = y[train_index], y[test_index]
-    tree = DecisionTreeClassifier(criterion="entropy", max_depth=3)
+    tree = DecisionTreeClassifier(criterion="entropy", max_depth=2)
     print("Fold {} : Training decision tree classifier over {} points...".format(i, len(y_train)))
     sys.stdout.flush()
     tree.fit(X_train, y_train)
@@ -154,7 +154,7 @@ for i, (train_index, test_index) in enumerate(cv.split(X)):
     y_train, y_test = y[train_index], y[test_index]
     print("Fold {} : Training Random Forest classifier over {} points...".format(i, len(y_train)))
     sys.stdout.flush()
-    clf = RandomForestClassifier(n_estimators=100, min_samples_split=4)
+    clf = RandomForestClassifier(n_estimators=100, max_depth=100)
     clf.fit(X_train, y_train)
 
     print("Evaluating classifier over {} points...".format(len(y_test)))
@@ -163,7 +163,7 @@ for i, (train_index, test_index) in enumerate(cv.split(X)):
 
     # show the comparison between the predicted and ground-truth labels
     conf = confusion_matrix(y_test, y_pred, labels=[0, 1, 2, 3])
-
+    print(conf)
     accuracy = np.sum(np.diag(conf)) / float(np.sum(conf))
     precision = np.nan_to_num(np.diag(conf) / np.sum(conf, axis=1).astype(float))
     recall = np.nan_to_num(np.diag(conf) / np.sum(conf, axis=0).astype(float))
