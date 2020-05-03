@@ -10,6 +10,7 @@ from feature_extractor_manager import get_combined_feature_vector
 from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix
 import pickle
+import matplotlib.pyplot as plt
 
 # %%---------------------------------------------------------------------------
 #
@@ -183,6 +184,23 @@ print("The average recall is {}".format(total_recall / 10.0)) # added sum() to r
 # Set this to the best model you found, trained on all the data:
 best_classifier = RandomForestClassifier(n_estimators=100)
 best_classifier.fit(X, y)
+importance = best_classifier.feature_importances_
+std = np.std([tree.feature_importances_ for tree in best_classifier.estimators_], axis=0)
+indices = np.argsort(importance)[::-1]
+print("Feature ranking:")
+
+for f in range(n_features):
+    print("%d. feature %d (%f)" % (f + 1, indices[f], importance[indices[f]]))
+
+plt.figure()
+plt.title("Feature importance")
+plt.plot(importance)
+# plt.bar(range(n_features), importance[indices],
+#        color="r", yerr=std[indices], align="center")
+# plt.xticks(range(n_features), indices)
+# plt.xlim([-1, n_features])
+plt.show()
+
 
 classifier_filename = 'classifier.pickle'
 print("Saving best classifier to {}...".format(os.path.join(output_dir, classifier_filename)))
