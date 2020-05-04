@@ -1,7 +1,7 @@
 # https://librosa.github.io/librosa/generated/librosa.feature.spectral_centroid.html
 
 import librosa.feature
-
+import numpy as np
 
 def _get_spectral_centroid(audio_data):
     # TODO
@@ -13,6 +13,7 @@ def get_feature_vector(labeled_audio_data):
     audio_data = labeled_audio_data[:-1]
     label = labeled_audio_data[-1]
     spectral_centroid = _get_spectral_centroid(audio_data)
+    spectral_centroid = np.array([np.mean(i) for i in spectral_centroid])
     return [spectral_centroid, label]
 
 

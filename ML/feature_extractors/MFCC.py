@@ -16,6 +16,7 @@ def get_feature_vector(labeled_audio_data):
     audio_data = labeled_audio_data[:-1]
     label = labeled_audio_data[-1]
     mfcc = _get_mfcc(audio_data)
+    mfcc = np.array([np.mean(i) for i in mfcc])
     return [mfcc, label]
 
 

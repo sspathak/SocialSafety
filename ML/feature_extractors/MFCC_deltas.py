@@ -8,7 +8,9 @@ def _get_mfcc_delta(audio_data):
     # TODO
     # use python_speech_features.mfcc() or librosa.feature.mfcc()
     mfcc_vec = librosa.feature.mfcc(audio_data[:(len(audio_data)//2)], 44100) # adjust sampling rate
+    mfcc_vec = np.array([np.mean(i) for i in mfcc_vec])
     mfcc_vec_2 = librosa.feature.mfcc(audio_data[(len(audio_data)//2):], 44100)
+    mfcc_vec_2 = np.array([np.mean(i) for i in mfcc_vec_2])
     mfcc_vec = mfcc_vec_2 - mfcc_vec
 
     # mfcc_vec = np.mean(mfcc_vec)
