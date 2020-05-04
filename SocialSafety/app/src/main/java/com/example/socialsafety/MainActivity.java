@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 checkPerm();
-                Log.d("Mani", "ClickedToggle");
+                Log.d("Manifest", "ClickedToggle");
                 IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
                 if(isChecked){
                     registerReceiver(bReciever, filter);
