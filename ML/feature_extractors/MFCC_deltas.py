@@ -11,7 +11,7 @@ def _get_mfcc_delta(audio_data):
     mfcc_vec = np.array([np.mean(i) for i in mfcc_vec])
     mfcc_vec_2 = librosa.feature.mfcc(audio_data[(len(audio_data)//2):], 44100)
     mfcc_vec_2 = np.array([np.mean(i) for i in mfcc_vec_2])
-    mfcc_vec = mfcc_vec_2 - mfcc_vec
+    mfcc_vec = abs(mfcc_vec_2) - abs(mfcc_vec)
 
     # mfcc_vec = np.mean(mfcc_vec)
     return mfcc_vec
