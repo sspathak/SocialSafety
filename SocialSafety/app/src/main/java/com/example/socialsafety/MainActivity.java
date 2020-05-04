@@ -10,7 +10,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +23,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     BluetoothAdapter mBluetoothAdapter;
     public ArrayList<BluetoothDevice> list;
-
+    StringBuilder names = new StringBuilder();
+    StringBuilder mac_add = new StringBuilder();
+    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         ToggleButton scan = (ToggleButton) findViewById((R.id.scanBtn));
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         list = new ArrayList<BluetoothDevice>();
+
 
         scan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -47,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     unregisterReceiver(bReciever);
                     mBluetoothAdapter.cancelDiscovery();
+                    names = new StringBuilder();
+                    mac_add = new StringBuilder();
                 }
             }
         });
-
 
 
 
@@ -61,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Z","BT ON");
             }
         });
+
+
+
 
     }
 
@@ -74,10 +80,28 @@ public class MainActivity extends AppCompatActivity {
 //                DeviceItem newDevice = new DeviceItem(device.getName(), device.getAddress(), "false");
                 // Add it to our adapter
 //                mAdapter.add(newDevice);
-                Log.d("FFF", "FOUND SOMETHING"+ device.getName());
+                if(device.getName() == null){
+                    mac_add.append("Masked Device :"+device.getAddress()+"\n");
+                }
+                else {
+                    mac_add.append(device.getName()+" : "+device.getAddress()+"\n");
+                }
+                count+=1;
+                goPrint();
+                Log.d("BTBTBTBTB", "FOUND SOMETHING"+ device.getName());
             }
         }
     };
+    public void goPrint(){
+        TextView addView = (TextView) findViewById(R.id.device_mac);
+        TextView countV = (TextView) findViewById(R.id.countView);
+        TextView overAllScore = (TextView) findViewById(R.id.textView);
+        Log.d("X", "s"+count);
+        overAllScore.setText(100 - count+"");
+        addView.setText(mac_add);
+        countV.setText(count+"");
+
+    }
 
     public void enableDisableBT(){
         if(mBluetoothAdapter == null){
