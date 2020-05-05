@@ -2,6 +2,17 @@
 Link to presentation: https://docs.google.com/presentation/d/1O4N225_Tz3dYs8fuonMF-9DhR1rRk9kmNqhO2ElCn3A/edit?usp=sharing
 
 
+# Cough detection
+Receives data from android phone through MyActivities app and passes the data to a Random Forest classifier.
+
+# Features
+1. MFCCs
+2. Power Spectral Density
+3. Spectral Flux
+4. Spectral rolloff
+5. Spectral Flatness
+
+
 # Labels
 
 The avialable labels are:
