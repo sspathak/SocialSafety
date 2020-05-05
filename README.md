@@ -10,6 +10,10 @@ Cough detection demo: Cough-detection-demo-final.mp4, https://drive.google.com/o
 The Python script receives data from an android phone through the MyActivities app. It passes the data to a Random Forest classifier which predicts if the audio slice has cough present in it.
 The Random Forest classifier was trained partially on the dataset mentioned at the end of this document. The rest of the data was collected by us.
 
+Links to youtube videos used in demo:
+1. Steve Jobs speech - https://youtu.be/UF8uR6Z6KLc?t=510
+2. Cough sample audio - https://www.youtube.com/watch?v=Qp09X74kjBc
+
 # Features
 We extracted the following features to generate the feature vector for each audio slice.
 
