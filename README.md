@@ -1,6 +1,7 @@
 # SocialSafety
 Link to presentation: https://docs.google.com/presentation/d/1O4N225_Tz3dYs8fuonMF-9DhR1rRk9kmNqhO2ElCn3A/edit?usp=sharing
-
+Bluetooth demo: Bluetooth-demo.mp4, https://drive.google.com/open?id=1wXD-x5E5XanVUXH3AVs836xIp1keX1SB
+Cough detection demo: Cough-detection-demo-final.mp4, https://drive.google.com/open?id=1d4dhCYmLRG932eNaItdDp-m-dor0LsiS
 
 # Cough detection
 The Python script receives data from an android phone through the MyActivities app. It passes the data to a Random Forest classifier which predicts if the audio slice has cough present in it.
