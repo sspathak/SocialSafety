@@ -3,9 +3,12 @@ Link to presentation: https://docs.google.com/presentation/d/1O4N225_Tz3dYs8fuon
 
 
 # Cough detection
-Receives data from android phone through MyActivities app and passes the data to a Random Forest classifier.
+The Python script receives data from an android phone through the MyActivities app. It passes the data to a Random Forest classifier which predicts if the audio slice has cough present in it.
+The Random Forest classifier was trained partially on the dataset mentioned at the end of this document. The rest of the data was collected by us.
 
 # Features
+We extracted the following features to generate the feature vector for each audio slice.
+
 1. MFCCs
 2. Power Spectral Density
 3. Spectral Flux
@@ -25,6 +28,7 @@ The avialable labels are:
 6. etc (i.e everything else)
 
 # Credit for dataset goes to:
+    https://github.com/Forsad/FluSense-data
     @article{10.1145/3381014,
     author = {Al Hossain, Forsad and Lover, Andrew A. and Corey, George A. and Reich, Nicholas G. and Rahman, Tauhidur},
     title = {FluSense: A Contactless Syndromic Surveillance Platform for Influenza-Like Illness in Hospital Waiting Areas},
